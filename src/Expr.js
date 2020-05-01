@@ -11,10 +11,6 @@ function Expr(obj) {
   this.raw = obj
 }
 
-Expr.prototype.toJSON = function() {
-  return this.raw
-}
-
 var varArgsFunctions = [
   'Do',
   'Call',
@@ -49,7 +45,12 @@ var specialCases = {
 
 var exprToString = function(expr, caller) {
   if (expr instanceof Expr) {
-    if ('value' in expr) return expr.toString()
+    if ('id' in expr) return expr.toString()
+    if ('set' in expr) return expr.toString()
+    if ('isoTime' in expr) return expr.toString()
+    if ('isoDate' in expr) return expr.toString()
+    if ('bytes' in expr) return expr.toString()
+    if ('query' in expr) return expr.toString()
 
     expr = expr.raw
   }
